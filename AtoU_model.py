@@ -19,7 +19,7 @@ def simple(X_Y):
     positions = np.arange(len(mt_region), dtype=np.int32)
     
 
-    duration = 101#201#15#101#15#101#15#101#15#101#10#61#15
+    duration = 201#201#15#101#15#101#15#101#15#101#10#61#15
     
     
     # rates
