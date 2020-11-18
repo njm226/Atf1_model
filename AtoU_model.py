@@ -58,7 +58,7 @@ def simple(X_Y):
     # spontaneous conversion-rate (direct conversion)
     beta4 = direct*len(mt_region)
     # spontaneous conversion-rate in cenH region (only A to U)
-    beta5 = 250*len(mt_region)#13.5*len(mt_region)#15*len(mt_region)#13.5 for SAU
+    beta5 = 300*len(mt_region)#13.5*len(mt_region)#15*len(mt_region)#13.5 for SAU
     #
     #beta6 = 250*len(mt_region)
     
