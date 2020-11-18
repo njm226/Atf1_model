@@ -9,7 +9,7 @@ importlib.reload(AtoU)
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def simple(X_Y, atf1):
+def simple(X_Y):
     
     
     N=X_Y[0]
@@ -64,7 +64,7 @@ def simple(X_Y, atf1):
     
     SAU = 0
     
-    #atf1 = 0
+    atf1 = X_Y[3]
 
     #rates = np.array([alpha1, alpha2, alpha3, alpha4, beta1, beta2, beta3, beta4, beta5])
     rates = np.array([beta1, beta2, beta3, beta4, beta5, alpha1, alpha2, alpha3, alpha4], dtype=np.double)
