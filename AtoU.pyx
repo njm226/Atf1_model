@@ -229,33 +229,8 @@ def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, in
                     # the state of the nucleosome is changed to S
                         mt_region[pos_conv]=2
                     
-                    
-                ## if the nucleosome is within the special region (cenH) and in state A
-            #    elif pos_conv >= atf1l and pos_conv < atf1r and nuc_conv == 1 and atf1 == 0:
-             #       # the state of the nucleosome is changed to U
-              #          mt_region[pos_conv]=2
-                        
-            #    elif pos_conv >= atf2l and pos_conv < atf2r and nuc_conv == 1 and atf1 == 0:
-            #        # the state of the nucleosome is changed to U
-             #           mt_region[pos_conv]=2
                         
              #   # else, nothing happens
-                        
-          # if the spontaneous conversion-rate (direct conversion in special region of A to U) is chosen
-        elif low_t_index == 5:     
-             # a position of a nucleosome to be converted is chosen
-             pos_conv = random_integers[j]
-             # the nucleosome at that posion is selected
-             nuc_conv = mt_region[pos_conv]
-                
-             # if the nucleosome is within the special region (cenH) and in state A
-             if pos_conv == 122 and nuc_conv == 1 and atf1 == 0:
-                 # the state of the nucleosome is changed to U
-                     mt_region[pos_conv]=2
-                    
-             elif pos_conv == 132 and nuc_conv == 1 and atf1 == 0:
-                 # the state of the nucleosome is changed to U
-                     mt_region[pos_conv]=2
                     
             
         # if the global recruitment-rate M-catalysed change of U to M (recruited conversion) is chosen
@@ -402,6 +377,24 @@ def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, in
                 if nuc_conv == 0:
                     # then the nucleosome to be converted is changed to a U
                     mt_region[pos_conv] = 1
+                    
+                        
+          # if the spontaneous conversion-rate (direct conversion in special region of A to U) is chosen
+        if atf1 == 0:
+            if low_t_index == 9:     
+                 # a position of a nucleosome to be converted is chosen
+                 pos_conv = random_integers[j]
+                 # the nucleosome at that posion is selected
+                 nuc_conv = mt_region[pos_conv]
+                    
+                 # if the nucleosome is within the special region (cenH) and in state A
+                 if pos_conv == 122 and nuc_conv == 1:
+                     # the state of the nucleosome is changed to U
+                         mt_region[pos_conv]=2
+                        
+                 elif pos_conv == 132 and nuc_conv == 1:
+                     # the state of the nucleosome is changed to U
+                         mt_region[pos_conv]=2
             
             
         # after each generation, half f the nucleosomes are exchanged with us

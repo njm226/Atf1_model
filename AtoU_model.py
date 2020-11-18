@@ -60,14 +60,19 @@ def simple(X_Y):
     # spontaneous conversion-rate in cenH region (only A to U)
     beta5 = 300*len(mt_region)#13.5*len(mt_region)#15*len(mt_region)#13.5 for SAU
     #
-    beta6 = 100*len(mt_region)
+    atf1 = X_Y[3]
+    if atf1 == 0:
+    
+        beta6 = 100*len(mt_region)
     
     SAU = 0
     
-    atf1 = X_Y[3]
 
-    #rates = np.array([alpha1, alpha2, alpha3, alpha4, beta1, beta2, beta3, beta4, beta5])
-    rates = np.array([beta1, beta2, beta3, beta4, beta5, beta6, alpha1, alpha2, alpha3, alpha4], dtype=np.double)
+    
+    if atf1 == 0:
+        rates = np.array([beta1, beta2, beta3, beta4, beta5, alpha1, alpha2, alpha3, alpha4, beta6], dtype=np.double)
+    else:
+        rates = np.array([beta1, beta2, beta3, beta4, beta5, alpha1, alpha2, alpha3, alpha4], dtype=np.double)
 
     #print(cenH_status_list)
     cenH_status_list, EcoRV_status_list, states, S_nucleosomes_cenH, S_nucleosomes, A_nucleosomes, U_nucleosomes= t_loop(duration, mt_region, positions, rates, SAU, atf1)
