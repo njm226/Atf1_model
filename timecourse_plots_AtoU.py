@@ -19,10 +19,10 @@ pool = multiprocessing.Pool(multiprocessing.cpu_count())
 
 
 
-X_Y=[[153,49,130]]
-X_Y_sm=[[182,49,130]]
-X_Y_sl=[[191,49,130]]
-X_Y_max=[[203,49,130]]
+X_Y=[[153,40,120]]
+X_Y_sm=[[182,40,120]]
+X_Y_sl=[[191,40,120]]
+X_Y_max=[[203,40,120]]
 
 reps=10000
 
