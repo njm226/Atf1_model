@@ -74,34 +74,34 @@ def simple(X_Y):
     
     
     
-    positions = list(positions)
-    x = positions*(duration) # at the x-axis, the position values are repeated 30 times
-    y = [] # and for the y-axis, each value is repeated 30 times
-    for i in range(duration):
-        for j in range(len(positions)):
-            y.append(positions[i]) 
+    #positions = list(positions)
+    #x = positions*(duration) # at the x-axis, the position values are repeated 30 times
+    #y = [] # and for the y-axis, each valueis repeated 30 times
+    #for i in range(duration):
+    #    for j in range(len(positions)):
+    #        y.append(positions[i]) 
     
     
-    x = np.array(x) # such that all PR_DUB and NURD values
-    y = np.array(y) # are paired
-    states = np.array(states)
-    #print(len(x),len(y),len(states))
-    df = pd.DataFrame(dict(x=x, y=y, state=states))
+    #x = np.array(x) # such that all PR_DUB and NURD values
+    #y = np.array(y) # are paired
+    #states = np.array(states)
+    ##print(len(x),len(y),len(states))
+    #df = pd.DataFrame(dict(x=x, y=y, state=states))
     
-    # plot
+    ## plot
     
-    nuc_states = df.groupby('state')
+    #nuc_states = df.groupby('state')
     
-    fig, ax = plt.subplots(figsize=(12,12)) # a new (quadratic) figure is generated
-    #ax.margins(0.05) # Optional, just adds 5% padding to the autoscaling
-    for name, state in nuc_states: # goes through all  3 groups
-        ax.plot(state.x, state.y, marker = 'o', color = name, linestyle='', ms = 2.5, label=name)
-        #ax.set_ylabel('Time (cell generations)', fontsize = 20)
-        #ax.set_xlabel('Nucleosomes', fontsize = 20)
-        ax.tick_params(labelsize='50')
-        ax.set_title("31 kb system", fontsize ='60')
+    #fig, ax = plt.subplots(figsize=(12,12)) # a new (quadratic) figure is generated
+    ##ax.margins(0.05) # Optional, just adds 5% padding to the autoscaling
+    #for name, state in nuc_states: # goes through all  3 groups
+    #    ax.plot(state.x, state.y, marker = 'o', color = name, linestyle='', ms = 2.5, label=name)
+    #    #ax.set_ylabel('Time (cell generations)', fontsize = 20)
+    #    #ax.set_xlabel('Nucleosomes', fontsize = 20)
+    #    ax.tick_params(labelsize='50')
+    #    ax.set_title("31 kb system", fontsize ='60')
     
-    #plt.savefig("timecourse_203_new.pdf")
+    ##plt.savefig("timecourse_203_new.pdf")
         
     
     # fig, ax1 = plt.subplots(figsize=(12,5))
