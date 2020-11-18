@@ -63,7 +63,7 @@ def simple(X_Y):
     atf1 = X_Y[3]
     if atf1 == 0:
     
-        beta6 = 100*len(mt_region)
+        beta6 = 30*len(mt_region)
     
     SAU = 0
     
