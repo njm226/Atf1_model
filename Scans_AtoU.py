@@ -387,6 +387,8 @@ for i in range(len(data_pairs_sm)):
     
     if EcoRV_timing_sm == 1:
         timing = 4
+    else:
+        timing = 1
     
 
     Timing.append(timing)
