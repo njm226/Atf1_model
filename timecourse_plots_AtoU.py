@@ -19,25 +19,21 @@ pool = multiprocessing.Pool(multiprocessing.cpu_count())
 
 
 
-X_Y=[[153,40,120]]
-X_Y_sm=[[182,40,120]]
-X_Y_sl=[[191,40,120]]
-X_Y_max=[[203,40,120]]
+X_Y_atf1_on=[[182,49,120], 0]
+X_Y_atf1_off=[[182,49,120], 1]
+
 
 reps=10000
 
-repeat=reps*X_Y
-repeat_sm=reps*X_Y_sm
-repeat_sl=reps*X_Y_sl
-repeat_max=reps*X_Y_max
+repeat=reps*X_Y_atf1_on
+repeat_sm=reps*X_Y_atf1_off
 
 duration=201
 
 if __name__ == '__main__':
     status_small = pool.map(ss, repeat) 
     status_m = pool.map(ss, repeat_sm) 
-    status_large = pool.map(ss, repeat_sl) 
-    status_max = pool.map(ss, repeat_max)
+    
 
 # status_small = []
 # for i in repeat:
@@ -74,43 +70,6 @@ cenH_list_m = np.zeros([len(repeat),duration])
 EcoRV_list_m = np.zeros([len(repeat),duration])
 
 
-
-#large system
-reporters_diff_large = np.zeros([len(repeat),duration])
-reporters_off_large = np.zeros([len(repeat),duration])
-reporters_on_large = np.zeros([len(repeat),duration])
-
-
-cenH_list_large = np.zeros([len(repeat),duration])
-EcoRV_list_large = np.zeros([len(repeat),duration])
-
-
-
-#max system
-reporters_diff_max = np.zeros([len(repeat),duration])
-reporters_off_max = np.zeros([len(repeat),duration])
-reporters_on_max = np.zeros([len(repeat),duration])
-
-
-cenH_list_max = np.zeros([len(repeat),duration])
-EcoRV_list_max = np.zeros([len(repeat),duration])
-
-
-
-#wt system
-                   
-cenH_average = np.zeros(len(repeat))
-EcoRV_average = np.zeros(len(repeat))
-
-#4.5kb insert system
-
-cenH_average_m = np.zeros(len(repeat))
-EcoRV_average_m = np.zeros(len(repeat))
-
-#6kb insert system
-
-cenH_average_large = np.zeros(len(repeat))
-EcoRV_average_large = np.zeros(len(repeat))
 
 
 for elt in range(len(repeat)):
@@ -208,105 +167,8 @@ for elt in range(len(repeat)):
     EcoRV_list_m[elt]=EcoRV_m
     
     
-    
-    
-    
-    
-    cenH_large = np.array(status_large[elt][0])
-    EcoRV_large = np.array(status_large[elt][1])
-    
-    
-    
-    # generate list with cenH and EcoRV states being both at different states (1)
-    reporter_diff_large = cenH_large != EcoRV_large
-    #transform that vector into a int vector
-    reporter_diff_large = reporter_diff_large.astype(int)
-    # copy this vector into reporter_states vector
-    reporters_diff_large[elt]=reporter_diff_large
-    
-    
-    # generate list with cenH and EcoRV states being both switched off
-    reporter_off_large = np.zeros(len(cenH_large),'int')
-    for index in range(len(cenH_large)):
-        if cenH_large[index]==1 and EcoRV_large[index]==1:
-            reporter_off_large[index]=1
-        else:
-            reporter_off_large[index]=0
-            
-    reporters_off_large[elt]=reporter_off_large
-    
-    
-    # generate list with cenH and EcoRV states being both switched on
-    reporter_on_large = np.zeros(len(cenH_large),'int')
-    for Index in range(len(cenH_large)):
-        if cenH_large[Index]==0 and EcoRV_large[Index]==0:
-            reporter_on_large[Index]=1
-        else:
-            reporter_on_large[Index]=0
-            
-    reporters_on_large[elt]=reporter_on_large
-    
-    #switch the values of the list (1 stands now for timepoint when reporter is on)
-    cenH_large=1-cenH_large
-    EcoRV_large=1-EcoRV_large
-    
-    cenH_list_large[elt]=cenH_large
-    EcoRV_list_large[elt]=EcoRV_large
-    
-    
-    
-    
-    
-    
-    
-    cenH_max = np.array(status_max[elt][0])
-    EcoRV_max = np.array(status_max[elt][1])
-    
-    
-    
-    # generate list with cenH and EcoRV states being both at different states (1)
-    reporter_diff_max = cenH_max != EcoRV_max
-    #transform that vector into a int vector
-    reporter_diff_max = reporter_diff_max.astype(int)
-    # copy this vector into reporter_states vector
-    reporters_diff_max[elt]=reporter_diff_max
-    
-    
-    # generate list with cenH and EcoRV states being both switched off
-    reporter_off_max = np.zeros(len(cenH_max),'int')
-    for index in range(len(cenH_max)):
-         if cenH_max[index]==1 and EcoRV_max[index]==1:
-             reporter_off_max[index]=1
-         else:
-             reporter_off_max[index]=0
-            
-    reporters_off_max[elt]=reporter_off_max
-    
-   
-    # generate list with cenH and EcoRV states being both switched on
-    reporter_on_max = np.zeros(len(cenH_max),'int')
-    for Index in range(len(cenH_max)):
-         if cenH_max[Index]==0 and EcoRV_max[Index]==0:
-             reporter_on_max[Index]=1
-         else:
-             reporter_on_max[Index]=0
-            
-    reporters_on_max[elt]=reporter_on_max
-    
-    #switch the values of the list (1 stands now for timepoint when reporter is on)
-    cenH_max=1-cenH_max
-    EcoRV_max=1-EcoRV_max
-    
-    cenH_list_max[elt]=cenH_max
-    EcoRV_list_max[elt]=EcoRV_max
-    
-    
-    
-    
     print(cenH_small)
     print(cenH_m)
-    print(cenH_large)
-    print(cenH_max)
     
     
     
@@ -419,18 +281,6 @@ on_m = (sum(reporters_on_m))/reps
 
 
 
-diff_large = (sum(reporters_diff_large))/reps
-off_large = (sum(reporters_off_large))/reps
-on_large = (sum(reporters_on_large))/reps
-
-
-
-
-diff_max = (sum(reporters_diff_max))/reps
-off_max = (sum(reporters_off_max))/reps
-on_max = (sum(reporters_on_max))/reps
-
-
 
 
 
@@ -445,21 +295,6 @@ EcoRV_total_small = (sum(EcoRV_list_small))/reps
 cenH_total_m = (sum(cenH_list_m))/reps
 #
 EcoRV_total_m = (sum(EcoRV_list_m))/reps
-
-
-
-
-cenH_total_large = (sum(cenH_list_large))/reps
-#
-EcoRV_total_large = (sum(EcoRV_list_large))/reps
-
-
-
-
-cenH_total_max = (sum(cenH_list_max))/reps
-
-EcoRV_total_max = (sum(EcoRV_list_max))/reps
-
 
 
     
@@ -546,19 +381,15 @@ EcoRV_total_max = (sum(EcoRV_list_max))/reps
 
 time = np.array(range(duration))
 
-y_axis = np.array([cenH_total_small, EcoRV_total_small,  cenH_total_m, EcoRV_total_m, cenH_total_large, EcoRV_total_large,cenH_total_max, EcoRV_total_max,])
+y_axis = np.array([cenH_total_small, EcoRV_total_small,  cenH_total_m, EcoRV_total_m])
         
 #fig, (ax1, ax2, ax3) = plt.subplots(nrows=1, ncols=3, figsize=((36, 12)))
 fig, (ax1) = plt.subplots(nrows=1, ncols=1, figsize=((15, 10)))
 #default line colors and styles
-ax1.plot(time,EcoRV_total_small, color='yellowgreen', label='mCherry 23 kb region')
-ax1.plot(time,cenH_total_small, color='cyan', label='cenH 23 kb region')
-ax1.plot(time,EcoRV_total_m, color='black', label='mCherry 27.5 kb region')
+ax1.plot(time,EcoRV_total_small, color='yellowgreen', label='mCherry atf1_on (4.5 kb)')
+ax1.plot(time,cenH_total_small, color='cyan', label='cenH atf1_on (4.5 kb)')
+ax1.plot(time,EcoRV_total_m, color='black', label='mCherry atf1_off (4.5 kb)')
 #ax1.plot(time,cenH_total_m,'ro', label='cenH 24 kb region')
-ax1.plot(time,EcoRV_total_large, color='red', label='mCherry 29 kb region')
-#ax1.plot(time,cenH_total_large, color='blue', label='cenH 26 kb region')
-ax1.plot(time,EcoRV_total_max, color='gold', label='mCherry 31 kb region')
-#ax1.plot(time,cenH_total_max, color='purple', label='cenH 28 kb region')
 ax1.legend(loc='upper left')
 #ax1.set_ylabel("fraction of 'ON' cells", fontsize = 35)  
 #ax1.set_xlabel('t (generations)', fontsize = 35)  
@@ -568,7 +399,7 @@ ax1.set_ylim([0.001,1])
 ax1.set_xlim([1,200])
 ax1.legend(fontsize='25')
 
-plt.savefig("timecourse_AtoU_without_replication.pdf")
+plt.savefig("timecourse_AtoU_Atf1.pdf")
     
 
 # #fig, (ax1, ax2, ax3) = plt.subplots(nrows=1, ncols=3, figsize=((36, 12)))

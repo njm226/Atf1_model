@@ -9,7 +9,7 @@ importlib.reload(AtoU)
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def simple(X_Y):
+def simple(X_Y, atf1):
     
     
     N=X_Y[0]
@@ -60,15 +60,17 @@ def simple(X_Y):
     # spontaneous conversion-rate in cenH region (only A to U)
     beta5 = 250*len(mt_region)#13.5*len(mt_region)#15*len(mt_region)#13.5 for SAU
     #
-    beta6 = 250*len(mt_region)
+    #beta6 = 250*len(mt_region)
     
     SAU = 0
+    
+    #atf1 = 0
 
     #rates = np.array([alpha1, alpha2, alpha3, alpha4, beta1, beta2, beta3, beta4, beta5])
-    rates = np.array([beta1, beta2, beta3, beta4, beta5, beta6, alpha1, alpha2, alpha3, alpha4], dtype=np.double)
+    rates = np.array([beta1, beta2, beta3, beta4, beta5, alpha1, alpha2, alpha3, alpha4], dtype=np.double)
 
     #print(cenH_status_list)
-    cenH_status_list, EcoRV_status_list, states, S_nucleosomes_cenH, S_nucleosomes, A_nucleosomes, U_nucleosomes= t_loop(duration, mt_region, positions, rates, SAU)
+    cenH_status_list, EcoRV_status_list, states, S_nucleosomes_cenH, S_nucleosomes, A_nucleosomes, U_nucleosomes= t_loop(duration, mt_region, positions, rates, SAU, atf1)
     
     
     
@@ -130,10 +132,10 @@ def simple(X_Y):
 
     return list(cenH_status_list), list(EcoRV_status_list)
  
-if __name__ == '__main__':
-    import time
-    #import cProfile
-    t1 = time.time()
-    simple([182, 45, 120])
-    print(time.time() - t1)
+# if __name__ == '__main__':
+#     import time
+#     #import cProfile
+#     t1 = time.time()
+#     simple([182, 49, 120], 0)
+#     print(time.time() - t1)
 
