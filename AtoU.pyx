@@ -231,11 +231,11 @@ def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, in
                     
                     
                 # if the nucleosome is within the special region (cenH) and in state A
-                elif pos_conv >= atf1l and pos_conv <= atf1r and nuc_conv == 1 and atf1 == 0:
+                elif pos_conv >= atf1l and pos_conv < atf1r and nuc_conv == 1 and atf1 == 0:
                     # the state of the nucleosome is changed to U
                         mt_region[pos_conv]=2
                         
-                elif pos_conv >= atf2l and pos_conv <= atf2r and nuc_conv == 1 and atf1 == 0:
+                elif pos_conv >= atf2l and pos_conv < atf2r and nuc_conv == 1 and atf1 == 0:
                     # the state of the nucleosome is changed to U
                         mt_region[pos_conv]=2
                         
