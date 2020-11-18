@@ -64,15 +64,18 @@ def simple(X_Y):
     if atf1 == 0:
     
         beta6 = 30*len(mt_region)
+    elif atf1 == 1:
+    
+        beta6 = 1*len(mt_region)
     
     SAU = 0
     
 
     
-    if atf1 == 0:
-        rates = np.array([beta1, beta2, beta3, beta4, beta5, alpha1, alpha2, alpha3, alpha4, beta6], dtype=np.double)
-    else:
-        rates = np.array([beta1, beta2, beta3, beta4, beta5, alpha1, alpha2, alpha3, alpha4], dtype=np.double)
+    #if atf1 == 0:
+    rates = np.array([beta1, beta2, beta3, beta4, beta5, alpha1, alpha2, alpha3, alpha4, beta6], dtype=np.double)
+    #else:
+    #    rates = np.array([beta1, beta2, beta3, beta4, beta5, alpha1, alpha2, alpha3, alpha4], dtype=np.double)
 
     #print(cenH_status_list)
     cenH_status_list, EcoRV_status_list, states, S_nucleosomes_cenH, S_nucleosomes, A_nucleosomes, U_nucleosomes= t_loop(duration, mt_region, positions, rates, SAU, atf1)

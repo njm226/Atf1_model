@@ -380,21 +380,21 @@ def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, in
                     
                         
           # if the spontaneous conversion-rate (direct conversion in special region of A to U) is chosen
-        if atf1 == 0:
-            if low_t_index == 9:     
-                 # a position of a nucleosome to be converted is chosen
-                 pos_conv = random_integers[j]
-                 # the nucleosome at that posion is selected
-                 nuc_conv = mt_region[pos_conv]
+        #if atf1 == 0:
+        elif low_t_index == 9:     
+             # a position of a nucleosome to be converted is chosen
+             pos_conv = random_integers[j]
+             # the nucleosome at that posion is selected
+             nuc_conv = mt_region[pos_conv]
+                
+             # if the nucleosome is within the special region (cenH) and in state A
+             if pos_conv == 122 and nuc_conv == 1:
+                 # the state of the nucleosome is changed to U
+                     mt_region[pos_conv]=2
                     
-                 # if the nucleosome is within the special region (cenH) and in state A
-                 if pos_conv == 122 and nuc_conv == 1:
-                     # the state of the nucleosome is changed to U
-                         mt_region[pos_conv]=2
-                        
-                 elif pos_conv == 132 and nuc_conv == 1:
-                     # the state of the nucleosome is changed to U
-                         mt_region[pos_conv]=2
+             elif pos_conv == 132 and nuc_conv == 1:
+                 # the state of the nucleosome is changed to U
+                     mt_region[pos_conv]=2
             
             
         # after each generation, half f the nucleosomes are exchanged with us
