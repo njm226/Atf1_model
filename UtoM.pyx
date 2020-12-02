@@ -8,7 +8,7 @@ from libc.math cimport log
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.cdivision(True)
-def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, int SAU, int atf1):
+def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, int SAU):
     
     # total time (in units of generations)
     cdef double T = 0
@@ -26,16 +26,8 @@ def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, in
     cdef int n_rates = len(rates)
     
     # borders of the cenH region
-    cdef int cenHl = 60
-    cdef int cenHr = 91
-    
-    ##borders of first atf1 region
-    #cdef int atf1l = 122
-    #cdef int atf1r = 123
-    
-    ##borders of second atf1 region
-    #cdef int atf2l = 132
-    #cdef int atf2r = 133
+    cdef int cenHl = 60#50
+    cdef int cenHr = 91#81
     
     if len(mt_region)==153:
        
@@ -59,8 +51,9 @@ def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, in
         EcoRVr = 182
         
     
+    
     # silencing_threshold
-    cdef int threshold1 = 16
+    cdef int threshold1 = 14#16
     cdef int threshold2 = 9
 
     cdef int low_t_index
@@ -109,7 +102,6 @@ def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, in
     A_nucleosomes = []
     U_nucleosomes = []
     S_nucleosomes_cenH = []
-    switched = 0
     
     # append the starting nucleosomes
     for nuc in mt_region:
@@ -229,9 +221,7 @@ def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, in
                     # the state of the nucleosome is changed to S
                         mt_region[pos_conv]=2
                     
-                        
-             #   # else, nothing happens
-                    
+            # else, nothing happens
             
         # if the global recruitment-rate M-catalysed change of U to M (recruited conversion) is chosen
         elif low_t_index == 5:                            
@@ -241,27 +231,56 @@ def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, in
             # the nucleosome at that posion is selected
             nuc_rec = mt_region[pos_rec]
             
-            if random_doubles3[j] > 0.5:
-                pos_conv = pos_rec - 1
-            else:
-                pos_conv = pos_rec + 1
+            pos_conv = random_integers2[j]
+            nuc_conv = mt_region[pos_conv]
+
+            #   #recruitment probability list relative to nucleosome at position x
+            # ran = random_doubles4[j]
+            # x = <int> (long_nn)**ran
+
+            #   # calculates the distance between nuc_rec and nuc_conv
+            # if random_doubles5[j] > 0.5:
+            #     Rand = 0
+            # else:
+            #     Rand = 1
+            # if Rand == 1:
+            #     x = -x
+            # pos_conv = pos_rec + x
+            
+            # if pos_conv < 0 or pos_conv > nn - 1:
+            #     nuc_conv = -10
+            # else:
+            #     nuc_conv = mt_region[pos_conv]
                 
-                    
-            if pos_conv >= 0 and pos_conv <= nn-1:
-                # the nucleosome at that posion is selected
-                nuc_conv = mt_region[pos_conv]
-            else:
-                nuc_conv = -1
             
             
-            # if the recruiting nucleosome is in state M
+            
+            #recruitment probability 1/(x+10)
+            # ran = random_doubles4[j]
+            # x = <int> ((long_nn+10)**ran -10)
+
+            # # calculates the distance between nuc_rec and nuc_conv
+            # if random_doubles5[j] > 0.5:
+            #     Rand = 0
+            # else:
+            #       Rand = 1
+            # if Rand == 1:
+            #       x = -x
+            # pos_conv = pos_rec + x
+            
+            # if pos_conv < 0 or pos_conv > nn - 1:
+            #       nuc_conv = -1
+            # else:
+            #       nuc_conv = mt_region[pos_conv]
+        
+            
+                
+            # and if the recruiting nucleosome is in state M (2)
             if nuc_rec == 2:
-                # and the nucleosome to be converted is in state U
+                # and the nucleosme to be converted is in state U
                 if nuc_conv == 1:
-                    # then it is changed to an A
-                   mt_region[pos_conv]= 2
-            
-            
+                    # then the nucleosome to be converted is changed to an M
+                    mt_region[pos_conv] = 2
                    
         
         # if the local recruitment-rate A-catalysed change of M to U (recruited conversion) is chosen
@@ -327,59 +346,28 @@ def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, in
             # the nucleosome at that posion is selected
             nuc_rec = mt_region[pos_rec]
             
-            pos_conv = random_integers2[j]
-            nuc_conv = mt_region[pos_conv]
-
-            # # recruitment probability list relative to nucleosome at position x
-            # ran = random_doubles4[j]
-            # x = <int> (long_nn)**ran
-   
-            # ##calculates the distance between nuc_rec and nuc_conv
-            # if random_doubles5[j] > 0.5:
-            #     Rand = 0
-            # else:
-            #     Rand = 1
-            # if Rand == 1:
-            #     x = -x
-            # pos_conv = pos_rec + x
             
-            # if pos_conv < 0 or pos_conv > nn - 1:
-            #     nuc_conv = -1
-            # else:
-            #     nuc_conv = mt_region[pos_conv]
-               
-            
-            
-            
-            #   #recruitment probability 1/(x+10)
-            # ran = random_doubles4[j]
-            # x = <int> ((long_nn+10)**ran -10)
-
-            #   # calculates the distance between nuc_rec and nuc_conv
-            # if random_doubles5[j] > 0.5:
-            #     Rand = 0
-            # else:
-            #     Rand = 1
-            # if Rand == 1:
-            #     x = -x
-            # pos_conv = pos_rec + x
-           
-            # if pos_conv < 0 or pos_conv > nn - 1:
-            #     nuc_conv = -10
-            # else:
-            #     nuc_conv = mt_region[pos_conv]
-        
-            
+            if random_doubles3[j] > 0.5:
+                pos_conv = pos_rec - 1
+            else:
+                pos_conv = pos_rec + 1
                 
-            # and if the recruiting nucleosome is in state M (2)
-            if nuc_rec == 2:
-                # and the nucleosme to be converted is in state A
-                if nuc_conv == 0:
-                    # then the nucleosome to be converted is changed to a U
-                    mt_region[pos_conv] = 1
                     
-                        
-          # if the spontaneous conversion-rate (direct conversion in special region of A to U) is chosen
+            if pos_conv >= 0 and pos_conv <= nn-1:
+                # the nucleosome at that posion is selected
+                nuc_conv = mt_region[pos_conv]
+            else:
+                nuc_conv = -1
+            
+            # if the recruiting nucleosome is in state M
+            if nuc_rec == 2:
+                # and the nucleosome to be converted is in state A
+                if nuc_conv == 0:
+                    # then it is changed to an U
+                   mt_region[pos_conv]= 1
+                   
+                   
+        # if the spontaneous conversion-rate (direct conversion in special region of A to U) is chosen
         #if atf1 == 0:
         elif low_t_index == 9:     
              # a position of a nucleosome to be converted is chosen
@@ -435,20 +423,26 @@ def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, in
             A_nucleosomes.append(current_states.count('blue'))
             U_nucleosomes.append(current_states.count('white'))
             
-            
              # erase current state vector again
             current_states = []
             
             S_nucleosomes_cenH.append(cenH_red)
+            
                 
             # the state of the mt_region at this time point is stored 
-            # mt_matrix[m]=mt_region
-            for i in positions:
-                rand = random.choice([0,1])
-                if rand == 1:
-                    mt_region[i]=1
-                
-                 
+            #mt_matrix[m]=mt_region
+  #          for i in positions:
+  #              rand = random.choice([0,1])
+  #              if rand == 1:
+  #                  mt_region[i]=1
+                    
+                    
+        # if T>= 50 and T<= 51:
+        #      for i in positions[]:
+        #          mt_region[i]=2
+            
+    
+    
     
     
     return  cenH_status_list, EcoRV_status_list, states, S_nucleosomes_cenH, S_nucleosomes, A_nucleosomes, U_nucleosomes

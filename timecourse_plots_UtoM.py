@@ -6,21 +6,19 @@ histogramm and timecourse data
 @author: fabio
 """
 
-
 import numpy as np
 #import pandas as pd
 import matplotlib.pyplot as plt
-#from smaller_model_function_AtoU import simple_small as ss
-from AtoU_model import simple as ss
+#from smaller_model_function_UtoM import simple_small as ss
+from UtoM_model import simple as ss
 import multiprocessing
 #import time
 import pickle
 pool = multiprocessing.Pool(multiprocessing.cpu_count())
 
 
-
-X_Y_atf1_on=[[182,49,130,0]] #X_Y_atf1_on=[[182,49,120,0]]
-X_Y_atf1_off=[[182,49,130,1]] #X_Y_atf1_off=[[182,49,120,1]]
+X_Y_atf1_on=[[182,90,110,0]] #X_Y_atf1_on=[[182,49,120,0]]
+X_Y_atf1_off=[[182,90,110,1]] #X_Y_atf1_off=[[182,49,120,1]]
 
 
 reps=10000
@@ -190,11 +188,11 @@ EcoRV_total_m = (sum(EcoRV_list_m))/reps
 
     
 # save state_list
-with open('AtoU_atf1_away_on_S30.txt', 'wb') as F:
+with open('UtoM_atf1_away_on_S30.txt', 'wb') as F:
     pickle.dump(EcoRV_total_small, F)
     
 # save state_list
-with open('AtoU_atf1_away_off_S30.txt', 'wb') as F:
+with open('UtoM_atf1_away_off_S30.txt', 'wb') as F:
     pickle.dump(EcoRV_total_m, F)
     
 
@@ -220,7 +218,7 @@ ax1.set_ylim([0.001,1])
 ax1.set_xlim([1,200])
 ax1.legend(fontsize='25')
 
-plt.savefig("AtoU_Atf1_cenH_away_S30.pdf")
+plt.savefig("UtoM_Atf1_cenH_away_S30.pdf")
     
 
 # #fig, (ax1, ax2, ax3) = plt.subplots(nrows=1, ncols=3, figsize=((36, 12)))
@@ -244,7 +242,7 @@ plt.savefig("AtoU_Atf1_cenH_away_S30.pdf")
 # ax1.set_xlim([1,46])
 # ax1.legend(fontsize='20')
 
-#plt.savefig("timecourse_small_SUS350")
+#plt.savefig("timecourse_small_SUS55_g90")
 
 # ax2.plot(time, off_small, color='k')
 # ax2.plot(time, on_small, color='b')
