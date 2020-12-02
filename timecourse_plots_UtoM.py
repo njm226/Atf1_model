@@ -17,8 +17,8 @@ import pickle
 pool = multiprocessing.Pool(multiprocessing.cpu_count())
 
 
-X_Y_atf1_on=[[182,90,110,0]] #X_Y_atf1_on=[[182,49,120,0]]
-X_Y_atf1_off=[[182,90,110,1]] #X_Y_atf1_off=[[182,49,120,1]]
+X_Y_atf1_on=[[182,110,90,0]] #X_Y_atf1_on=[[182,49,120,0]]
+X_Y_atf1_off=[[182,110,90,1]] #X_Y_atf1_off=[[182,49,120,1]]
 
 
 reps=10000
