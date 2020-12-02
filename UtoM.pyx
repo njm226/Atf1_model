@@ -431,10 +431,10 @@ def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, in
                 
             # the state of the mt_region at this time point is stored 
             #mt_matrix[m]=mt_region
-  #          for i in positions:
-  #              rand = random.choice([0,1])
-  #              if rand == 1:
-  #                  mt_region[i]=1
+            for i in positions:
+                rand = random.choice([0,1])
+                if rand == 1:
+                    mt_region[i]=1
                     
                     
         # if T>= 50 and T<= 51:
