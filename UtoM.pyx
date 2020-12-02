@@ -376,11 +376,11 @@ def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, in
              nuc_conv = mt_region[pos_conv]
                 
              # if the nucleosome is within the special region (cenH) and in state A
-             if pos_conv == 92 and nuc_conv == 1: #   if pos_conv == 92 and
+             if pos_conv == 132 and nuc_conv == 1: #   if pos_conv == 92 and
                  # the state of the nucleosome is changed to U
                      mt_region[pos_conv]=2
                     
-             elif pos_conv == 93 and nuc_conv == 1: #   elif pos_conv == 93
+             elif pos_conv == 133 and nuc_conv == 1: #   elif pos_conv == 93
                  # the state of the nucleosome is changed to U
                      mt_region[pos_conv]=2
             
@@ -435,15 +435,9 @@ def t_loop(int duration, int[:] mt_region, int[:] positions, double[:] rates, in
                 rand = random.choice([0,1])
                 if rand == 1:
                     mt_region[i]=1
-                    
-                    
-        # if T>= 50 and T<= 51:
-        #      for i in positions[]:
-        #          mt_region[i]=2
-            
-    
-    
-    
+       
+        
+        
     
     return  cenH_status_list, EcoRV_status_list, states, S_nucleosomes_cenH, S_nucleosomes, A_nucleosomes, U_nucleosomes
     
