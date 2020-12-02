@@ -190,11 +190,11 @@ EcoRV_total_m = (sum(EcoRV_list_m))/reps
 
     
 # save state_list
-with open('AtoU_atf1_away_on_S30.txt', 'wb') as F:
+with open('AtoU_at_atf1_on_S30.txt', 'wb') as F:
     pickle.dump(EcoRV_total_small, F)
     
 # save state_list
-with open('AtoU_atf1_away_off_S30.txt', 'wb') as F:
+with open('AtoU_at_atf1_off_S30.txt', 'wb') as F:
     pickle.dump(EcoRV_total_m, F)
     
 
@@ -220,7 +220,7 @@ ax1.set_ylim([0.001,1])
 ax1.set_xlim([1,200])
 ax1.legend(fontsize='25')
 
-plt.savefig("AtoU_Atf1_cenH_away_S30.pdf")
+plt.savefig("AtoU_Atf1_at_cenH_S30.pdf")
     
 
 # #fig, (ax1, ax2, ax3) = plt.subplots(nrows=1, ncols=3, figsize=((36, 12)))
