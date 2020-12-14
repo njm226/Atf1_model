@@ -63,16 +63,24 @@ def simple(X_Y):
     if atf1 == 0:
     
         beta6 = 30*len(mt_region)
+        beta7 = 30*len(mt_region)
+        
     elif atf1 == 1:
     
         beta6 = 0.001*len(mt_region)
+        beta7 = 0.001*len(mt_region)
+        
+    elif atf1 == 2:
+    
+        beta6 = 30*len(mt_region)
+        beta7 = 0.001*len(mt_region)
     
     SAU = 0
     
 
     
     #if atf1 == 0:
-    rates = np.array([beta1, beta2, beta3, beta4, beta5, alpha1, alpha2, alpha3, alpha4, beta6], dtype=np.double)
+    rates = np.array([beta1, beta2, beta3, beta4, beta5, alpha1, alpha2, alpha3, alpha4, beta6, beta7], dtype=np.double)
     #else:
     #    rates = np.array([beta1, beta2, beta3, beta4, beta5, alpha1, alpha2, alpha3, alpha4], dtype=np.double)
 
