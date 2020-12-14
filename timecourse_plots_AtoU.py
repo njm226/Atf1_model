@@ -19,9 +19,9 @@ pool = multiprocessing.Pool(multiprocessing.cpu_count())
 
 
 
-X_Y_atf1_on=[[182,49,120,0]] #X_Y_atf1_on=[[182,49,130,0]]
-X_Y_atf1_off=[[182,49,120,1]] #X_Y_atf1_off=[[182,49,130,1]]
-X_Y_atf1_one_on=[[182,49,120,2]] #X_Y_atf1_off=[[182,49,130,1]]
+X_Y_atf1_on=[[182,49,125,0]] #X_Y_atf1_on=[[182,49,130,0]]
+X_Y_atf1_off=[[182,49,125,1]] #X_Y_atf1_off=[[182,49,130,1]]
+X_Y_atf1_one_on=[[182,49,125,2]] #X_Y_atf1_off=[[182,49,130,1]]
 
 
 reps=10000
@@ -256,15 +256,15 @@ EcoRV_total_l = (sum(EcoRV_list_l))/reps
 
 
 # save state_list
-with open('AtoU_Atf1_on_S30_AtoU_49_UtoM_120_both_present.txt', 'wb') as F:
+with open('AtoU_Atf1_on_S100_AtoU_49_UtoM_125_both_present.txt', 'wb') as F:
     pickle.dump(EcoRV_total_small, F)
     
 # save state_list
-with open('AtoU_Atf1_off_S30_AtoU_49_UtoM_120_both_deleted.txt', 'wb') as F:
+with open('AtoU_Atf1_off_S100_AtoU_49_UtoM_125_both_deleted.txt', 'wb') as F:
     pickle.dump(EcoRV_total_m, F)
     
 # save state_list
-with open('AtoU_Atf1_off_S30_AtoU_49_UtoM_120_one_deleted.txt', 'wb') as F:
+with open('AtoU_Atf1_off_S100_AtoU_49_UtoM_125_one_deleted.txt', 'wb') as F:
     pickle.dump(EcoRV_total_l, F)
     
 
@@ -291,7 +291,7 @@ ax1.set_ylim([0.001,1])
 ax1.set_xlim([1,200])
 ax1.legend(fontsize='25')
 
-plt.savefig("AtoU_Atf1_S30_AtoU_49_UtoM_120.pdf")
+plt.savefig("AtoU_Atf1_S100_AtoU_49_UtoM_125.pdf")
     
 
 # #fig, (ax1, ax2, ax3) = plt.subplots(nrows=1, ncols=3, figsize=((36, 12)))
