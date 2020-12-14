@@ -22,24 +22,32 @@ def model(x,a,b):
 
 
 ## save state_list
-with open('EcoRV_small_g41.txt', 'rb') as F:
+with open('AtoU_atf1_away_off_S30.txt', 'rb') as F:
     EcoRV_total_small = pickle.load(F)
     
 ## save state_list
-with open('EcoRV_m_g41.txt', 'rb') as F:
-   EcoRV_total_m = pickle.load(F)
+with open('AtoU_atf1_away_on_S30.txt', 'rb') as F:
+    EcoRV_total_m = pickle.load(F)
+
+# ## save state_list
+# with open('EcoRV_small_g41.txt', 'rb') as F:
+#     EcoRV_total_small = pickle.load(F)
     
-## save state_list
-with open('EcoRV_large_g41.txt', 'rb') as F:
-    EcoRV_total_large = pickle.load(F)
+# ## save state_list
+# with open('EcoRV_m_g41.txt', 'rb') as F:
+#    EcoRV_total_m = pickle.load(F)
     
-## save state_list
-with open('EcoRV_max_g41.txt', 'rb') as F:
-    EcoRV_total_max = pickle.load(F)
+# ## save state_list
+# with open('EcoRV_large_g41.txt', 'rb') as F:
+#     EcoRV_total_large = pickle.load(F)
+    
+# ## save state_list
+# with open('EcoRV_max_g41.txt', 'rb') as F:
+#     EcoRV_total_max = pickle.load(F)
 
 
 duration=198
-y = EcoRV_total_small[3:]
+y = EcoRV_total_m[3:]
 x = np.array(range(duration))
 
 

@@ -19,14 +19,16 @@ pool = multiprocessing.Pool(multiprocessing.cpu_count())
 
 
 
-X_Y_atf1_on=[[182,49,130,0]] #X_Y_atf1_on=[[182,49,120,0]]
-X_Y_atf1_off=[[182,49,130,1]] #X_Y_atf1_off=[[182,49,120,1]]
+X_Y_atf1_on=[[182,49,120,0]] #X_Y_atf1_on=[[182,49,130,0]]
+X_Y_atf1_off=[[182,49,120,1]] #X_Y_atf1_off=[[182,49,130,1]]
+#X_Y_atf1_one_on=[[182,49,120,2]] #X_Y_atf1_off=[[182,49,130,1]]
 
 
 reps=10000
 
 repeat=reps*X_Y_atf1_on
 repeat_sm=reps*X_Y_atf1_off
+#repeat_m=reps*X_Y_atf1_one_on
 
 duration=201
 
@@ -44,6 +46,16 @@ reporters_on_small = np.zeros([len(repeat),duration])
 cenH_list_small = np.zeros([len(repeat),duration])
 EcoRV_list_small = np.zeros([len(repeat),duration])
 
+
+
+#medium system
+reporters_diff_m = np.zeros([len(repeat),duration])
+reporters_off_m = np.zeros([len(repeat),duration])
+reporters_on_m = np.zeros([len(repeat),duration])
+
+
+cenH_list_m = np.zeros([len(repeat),duration])
+EcoRV_list_m = np.zeros([len(repeat),duration])
 
 
 #medium system
@@ -190,11 +202,11 @@ EcoRV_total_m = (sum(EcoRV_list_m))/reps
 
     
 # save state_list
-with open('AtoU_at_atf1_away_together_on_S30.txt', 'wb') as F:
+with open('AtoU_Atf1_on_S30_AtoU_49_UtoM_120_without_single_atf1_KO.txt', 'wb') as F:
     pickle.dump(EcoRV_total_small, F)
     
 # save state_list
-with open('AtoU_atf1_away_together_off_S30.txt', 'wb') as F:
+with open('AtoU_Atf1_off_S30_AtoU_49_UtoM_120_without_single_atf1_KO.txt', 'wb') as F:
     pickle.dump(EcoRV_total_m, F)
     
 
@@ -207,9 +219,9 @@ y_axis = np.array([cenH_total_small, EcoRV_total_small,  cenH_total_m, EcoRV_tot
 #fig, (ax1, ax2, ax3) = plt.subplots(nrows=1, ncols=3, figsize=((36, 12)))
 fig, (ax1) = plt.subplots(nrows=1, ncols=1, figsize=((15, 10)))
 #default line colors and styles
-ax1.plot(time,EcoRV_total_small, color='yellowgreen', label='mCherry atf1_on (4.5 kb)')
-ax1.plot(time,cenH_total_small, color='cyan', label='cenH atf1_on (4.5 kb)')
-ax1.plot(time,EcoRV_total_m, color='black', label='mCherry atf1_off (4.5 kb)')
+ax1.plot(time,EcoRV_total_small, color='yellowgreen', label='mCherry both atf1-sites on (4.5 kb)')
+ax1.plot(time,cenH_total_small, color='cyan', label='cenH both atf1-sites on(4.5 kb)')
+ax1.plot(time,EcoRV_total_m, color='black', label='mCherry both atf1-sites off (4.5 kb)')
 #ax1.plot(time,cenH_total_m,'ro', label='cenH 24 kb region')
 ax1.legend(loc='upper left')
 #ax1.set_ylabel("fraction of 'ON' cells", fontsize = 35)  
@@ -220,7 +232,7 @@ ax1.set_ylim([0.001,1])
 ax1.set_xlim([1,200])
 ax1.legend(fontsize='25')
 
-plt.savefig("AtoU_Atf1_away_together_S30.pdf")
+plt.savefig("AtoU_Atf1_S30_AtoU_49_UtoM_120_without_single_atf1_KO.pdf")
     
 
 # #fig, (ax1, ax2, ax3) = plt.subplots(nrows=1, ncols=3, figsize=((36, 12)))
