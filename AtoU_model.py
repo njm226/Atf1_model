@@ -72,8 +72,8 @@ def simple(X_Y):
         
     elif atf1 == 2:
     
-        beta6 = 100*len(mt_region)
-        beta7 = 0.001*len(mt_region)
+        beta6 = 0.001*len(mt_region)
+        beta7 = 100*len(mt_region)
     
     SAU = 0
     
